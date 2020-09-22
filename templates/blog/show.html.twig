@@ -30,16 +30,10 @@
           </ul>
         </div>
         <div class="col-3 text-center align-self-start">
-<<<<<<< HEAD
           <p class="mt-2 py-2 font-weight-boldb bg-dark border text-white" style="font-size: 13px;">Référence : {{ article.reference }}</p>
           <p class="mt-2 py-2 font-weight-boldb bg-light border" style="font-size: 13px;">Fiche créée le : <b>{{ article.createdAt | date("d/m/Y") }} à {{ article.createdAt | date("H:i") }}</b></p>
           <p class="lead mt-3 font-weight-boldb bg-info text-white">{{ article.category.title }}</p>
           <p class="lead mt-3 font-weight-bold bg-light border">Prix : {{ article.prix }} €</p>
-=======
-          <p class="mt-2 py-2 bg-light border">{{ article.createdAt | date("d/m/Y") }} à {{ article.createdAt | date("H:i") }}</p>
-          <p class="lead py-1 mt-3 font-weight-boldb bg-info text-white">{{ article.category.title }}</p>
-          <p class="lead py-1 mt-3 font-weight-bold bg-light border">{{ article.prix }} €</p>
->>>>>>> be47fb6a41e996260a8998109c2df4ae58605bc9
           <p class="lead font-weight-bold btn btn-outline-warning btn-lg px-5">{{ article.status }}</p>
         </div>
       </div><!-- //row -->

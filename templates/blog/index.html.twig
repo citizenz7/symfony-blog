@@ -8,44 +8,6 @@
 
   {% if app.user %}
     <h3 class="pb-3">Liste des Fiches Articles</h3>
-<<<<<<< HEAD
-    <table class="table table-hover">
-      <thead>
-        <th>Image</th>
-        <th>Id</th>
-        <th width="17%">Nom</th>
-        <th>Catégorie</th>
-        <th>Contenu</th>
-        <th width="8%">Prix</th>
-        <th>Status</th>
-        <th>Création</th>
-        <th>Action</th>
-      </thead>
-      <tbody>
-        {# on boucle tous les articles avec for #}
-        {% for article in articles %}
-          <tr>
-            <td><img src="{{ article.images }}" class="img-fluid float-left mr-4" style="max-width:50px;" alt=""></td>
-            <td>{{ article.id }}</td>
-            <td><a href="{{ path('blog_show', {'id': article.id}) }}">{{ article.title }}</a></td>
-            <td>{{ article.category.title }}</td>
-            <td class="text-justify" style="font-size:12px;">{{ article.content | raw }}</td>
-            <td style="font-size:12px; text-align:right;">{{ article.prix }} €</td>
-            <td style="font-size:12px;">
-              {% if article.status == "vendu" %}
-                <span class="text-danger">{{ article.status }}</span>
-              {% else %}
-                <span class="text-info">{{ article.status }}</span>
-              {% endif %}
-            </td>
-            <td style="font-size: 11px;">{{ article.createdAt | date("d/m/Y")}} à {{ article.createdAt | date("H:i") }}</td>
-            <td><a href="{{ path('blog_edit', {'id': article.id}) }}" class="btn btn-info btn-sm">Edit</a> {{ include('blog/delete.html.twig') }}</td>
-          </tr>
-          <!--<br><a href="{#{{ path('blog_show', {'id': article.id}) }}#}" class="btn btn-sm btn-primary mb-5">Lire la suite</a>-->
-        {% endfor %}
-      </tbody>
-    </table>
-=======
     <div class="table-responsive-sm">
       <table class="table table-hover">
         <thead>
@@ -78,7 +40,6 @@
         </tbody>
       </table>
     </div>
->>>>>>> be47fb6a41e996260a8998109c2df4ae58605bc9
 
   {% else %}
     <div class="bg-warning rounded py-3 px-3 text-center">
