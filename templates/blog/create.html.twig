@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formArticle 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}
+    {% if editMode %}
+        Edition de l'article
+    {% else %}
+        Création de l'article
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+
+    {% if app.user %}
+
+        {% if editMode %}
+            <h3 class="pb-3">Edition d'un article</h3>
+        {% else %}
+            <h3 class="pb-3">Rédaction d'une nouvelle fiche d'article</h3>
+        {% endif %}
+
+        {{ form_start(formArticle) }}
+
+            {{ form_row(formArticle.title, {'label': "Titre", 'attr': {'placeholder': "Titre de l'article"}}) }}
+            {{ form_row(formArticle.category, {'label': "Catégorie"}) }}
+            {{ form_row(formArticle.status, {'label': "Status : vendu ou reserve", 'attr': {'placeholder': "Préciser le status de l'article"}}) }}
+            {{ form_row(formArticle.reference, {'label': "Référence complète de l'article", 'attr': {'placeholder': "Référence"}}) }}
+            {{ form_row(formArticle.prix, {'label': "Prix de l'article en Euro", 'attr': {'placeholder': "Prix en €"}}) }}
+            {{ form_row(formArticle.date_achat, {'label': "Date d'achat"}) }}
+            {{ form_row(formArticle.date_reservation, {'label': "Date de réservation"}) }}
+            {{ form_row(formArticle.date_fingarantie, {'label': "Date de fin de garantie"}) }}
+            {{ form_row(formArticle.adresse_fournisseur, {'label': "Nom et adresse du fournisseur", 'attr': {'placeholder': "Nom et adresse du fournisseur"}}) }}
+            {{ form_row(formArticle.content, {'label': "Présentation rapide de l'article", 'attr': {'placeholder': "Présentation rapide de l'article", 'rows': "4"}}) }}
+            {{ form_row(formArticle.images, {'label': "URL de l'image", 'attr': {'placeholder': "URL de l'image"}}) }}
+            {{ form_row(formArticle.photo_ticket, {'label': "Photo du ticket d'achat", 'attr': {'placeholder': "Ticket"}}) }}
+            {{ form_row(formArticle.manuel_utilisation, {'label': "Manuel d'utilisation", 'attr': {'placeholder': "Manuel d'utilisation", 'rows': "6"}}) }}
+
+            <div class="mt-5 text-right">
+                {% if editMode %}
+                    <button type="submit" class="btn btn-warning mr-1">Editer l'article</button> 
+                {% else %}
+                    <button type="submit" class="btn btn-success mr-1">Créer l'article</button>
+                {% endif %}
+                
+                <button type="reset" class="btn btn-secondary">Annuler</button>
+            </div>
+
+        {{ form_end(formArticle) }}
+    
+    {% else %}
+        <div class="bg-warning rounded py-3 px-3 text-center">
+            <i class="fas fa-exclamation-circle fa-3x"></i>
+            <h3>Vous ne pouvez pas accéder à cette page !</h3>
+        </div>
+    {% endif %}
+
+{% endblock %}
