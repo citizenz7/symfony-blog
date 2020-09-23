@@ -1,39 +1,37 @@
 {% extends 'base.html.twig' %}
 
   {% block title %}
-    Liste des fiches Articles du Dashboard ACS 2020
+    Liste des articles
   {% endblock %}
 
   {% block body %}
 
   {% if app.user %}
-    <h3 class="pb-3">Liste des Fiches Articles</h3>
+    <h3 class="pb-3">Liste des articles</h3>
     <div class="table-responsive-sm">
       <table class="table table-hover">
         <thead>
           <th>Image</th>
-          <th>Id</th>
           <th width="17%">Nom</th>
           <th>Catégorie</th>
           <th>Contenu</th>
           <th width="9%">Prix</th>
           <th>Status</th>
-          <th>Création</th>
-          <th>Action</th>
+          <th width="11%">Créé le</th>
+
         </thead>
         <tbody>
           {# on boucle tous les articles avec for #}
           {% for article in articles %}
             <tr>
               <td><img src="{{ article.images }}" class="img-fluid float-left mr-4" style="max-width:50px;" alt=""></td>
-              <td>{{ article.id }}</td>
               <td><a href="{{ path('blog_show', {'id': article.id}) }}">{{ article.title }}</a></td>
               <td>{{ article.category.title }}</td>
               <td class="text-justify" style="font-size:12px;">{{ article.content | raw }}</td>
               <td style="font-size:12px;"> {{ article.prix }} € </td>
               <td style="font-size:12px;"> {{ article.status }} </td>
               <td style="font-size: 11px;">{{ article.createdAt | date("d/m/Y")}} à {{ article.createdAt | date("H:i") }}</td>
-              <td><a href="{{ path('blog_edit', {'id': article.id}) }}" class="btn btn-info btn-sm">Edit</a> {{ include('blog/delete.html.twig') }}</td>
+
             </tr>
             <!--<br><a href="{#{{ path('blog_show', {'id': article.id}) }}#}" class="btn btn-sm btn-primary mb-5">Lire la suite</a>-->
           {% endfor %}
