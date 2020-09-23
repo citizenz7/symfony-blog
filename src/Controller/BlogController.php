@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -79,6 +80,24 @@ class BlogController extends AbstractController
 
         // Si le formulaire est "soumis" et qu'en plus tous les champs sont validés, on envoie
         if($form->isSubmitted() && $form->isValid()) {
+
+            // UPLOAD D'IMAGE
+            /** @var UploadedFile $uploadedFile */
+            $uploadedFile = $form['img']->getData();
+
+            if ($uploadedFile) {
+                $destination = $this->getParameter('kernel.project_dir').'/public/uploads/article_image';
+
+                $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $newFilename = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
+
+                $uploadedFile->move(
+                    $destination,
+                    $newFilename
+                );
+                $article->setImages($newFilename);
+            }
+
             // si c'est un nouvel article (qui donc n'a pas encore d'ID), on met une date
             // sinon (édition), on ne touche pas à la date
             if(!$article->getID()) {
@@ -103,6 +122,8 @@ class BlogController extends AbstractController
             'editMode' => $article->getId() !== null
         ]);
     }
+
+
 
     // Vue qui permet d'afficher un article
     /**
@@ -140,6 +161,10 @@ class BlogController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            $destination = $this->getParameter('kernel.project_dir').'/public/uploads/article_image/';
+            unlink($destination.$article->getImages());
+
             $entityManager->remove($article);
             $entityManager->flush();
         }

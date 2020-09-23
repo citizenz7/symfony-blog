@@ -5,14 +5,14 @@
  {% if app.user %}
 
     <div class="pb-2 border py-3 px-3 mb-3">
-      <h3>FICHE : {{ article.title }}</h3>
+      <h3>{{ article.title }}</h3>
       <div class="text-muted font-italic pb-2">
         <!--Créée le {#{ article.createdAt | date("d/m/Y") }#} à {#{ article.createdAt | date("H:i") }#}, dans la catégorie <span class="font-weight-bold">{#{ article.category.title }#}</span>-->
       </div>
-      <div class="row" style="height:480px;">
+      <div class="row row-show">
         <div class="col">
-          <img src="{{ article.images }}" class="img-fluid float-left mr-3 mt-1" style="max-width:130px;" alt="{{ article.title }}">
-          <p class="text-justify" style="height: 120px;">
+          <img src="../uploads/article_image/{{ article.images }}" class="img-fluid float-left img-show mr-3 mt-1" alt="{{ article.title }}">
+          <p class="text-justify content-show">
             {{ article.content | raw }}
           </p>
 
@@ -30,8 +30,8 @@
           </ul>
         </div>
         <div class="col-3 text-center align-self-start">
-          <p class="mt-2 py-2 font-weight-boldb bg-dark border text-white" style="font-size: 13px;">Référence : {{ article.reference }}</p>
-          <p class="mt-2 py-2 font-weight-boldb bg-light border" style="font-size: 13px;">Fiche créée le : <b>{{ article.createdAt | date("d/m/Y") }} à {{ article.createdAt | date("H:i") }}</b></p>
+          <p class="mt-2 py-2 font-weight-boldb bg-dark border text-white tinytext">Référence : {{ article.reference }}</p>
+          <p class="mt-2 py-2 font-weight-boldb bg-light border tinytext">Fiche créée le : <b>{{ article.createdAt | date("d/m/Y") }} à {{ article.createdAt | date("H:i") }}</b></p>
           <p class="lead mt-3 font-weight-boldb bg-info text-white">{{ article.category.title }}</p>
           <p class="lead mt-3 font-weight-bold bg-light border">Prix : {{ article.prix }} €</p>
           <p class="lead font-weight-bold btn btn-outline-warning btn-lg px-5">{{ article.status }}</p>

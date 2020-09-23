@@ -1,20 +1,51 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+  {% block title %}
+    Liste des articles
+  {% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+  {% block body %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+  {% if app.user %}
+    <h3 class="pb-3">Liste des articles</h3>
+    <div class="table-responsive-sm">
+      <table class="table table-hover">
+        <thead>
+          <th>Id</th>
+          <th>Image</th>
+          <th width="20%">Nom</th>
+          <th>Catégorie</th>
+          <th>Contenu</th>
+          <th width="9%">Prix</th>
+          <th>Status</th>
+          <th width="11%">Créé le</th>
+          <th>Action</th>
+        </thead>
+        <tbody>
+          {# on boucle tous les articles avec for #}
+          {% for article in articles %}
+            <tr>
+              <td>{{ article.id }}</td>
+              <td><img src="./uploads/article_image/{{ article.images }}" class="img-fluid float-left mr-4 img-list" alt=""></td>
+              <td><a href="{{ path('blog_show', {'id': article.id}) }}">{{ article.title }}</a></td>
+              <td>{{ article.category.title }}</td>
+              <td class="text-justify tinytext">{{ article.content | raw }}</td>
+              <td class="tinytext"> {{ article.prix }} € </td>
+              <td class="tinytext"> {{ article.status }} </td>
+              <td class="tinytinytext">{{ article.createdAt | date("d/m/Y") }} à {{ article.createdAt | date("H:i") }}</td>
+              <td><a href="{{ path('blog_edit', {'id': article.id}) }}" class="btn btn-info btn-sm">Edit</a> {{ include('blog/delete.html.twig') }}</td>
+            </tr>
+            <!--<br><a href="{#{{ path('blog_show', {'id': article.id}) }}#}" class="btn btn-sm btn-primary mb-5">Lire la suite</a>-->
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/acs.DESKTOP-M8546QL/Desktop/Symfony/symfony-blog/src/Controller/AdminController.php'|file_link(0) }}">src/Controller/AdminController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/acs.DESKTOP-M8546QL/Desktop/Symfony/symfony-blog/templates/admin/index.html.twig'|file_link(0) }}">templates/admin/index.html.twig</a></code></li>
-    </ul>
-</div>
-{% endblock %}
+  {% else %}
+    <div class="bg-warning rounded py-3 px-3 text-center">
+      <i class="fas fa-exclamation-circle fa-3x"></i>
+      <h3>Vous ne pouvez pas accéder à cette page !</h3>
+    </div>
+  {% endif %}
+
+  {% endblock %}

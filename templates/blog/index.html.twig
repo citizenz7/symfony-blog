@@ -12,7 +12,7 @@
       <table class="table table-hover">
         <thead>
           <th>Image</th>
-          <th width="17%">Nom</th>
+          <th width="20%">Nom</th>
           <th>Catégorie</th>
           <th>Contenu</th>
           <th width="9%">Prix</th>
@@ -24,13 +24,13 @@
           {# on boucle tous les articles avec for #}
           {% for article in articles %}
             <tr>
-              <td><img src="{{ article.images }}" class="img-fluid float-left mr-4" style="max-width:50px;" alt=""></td>
+              <td><img src="uploads/article_image/{{ article.images }}" class="img-fluid float-left mr-4 img-list" alt=""></td>
               <td><a href="{{ path('blog_show', {'id': article.id}) }}">{{ article.title }}</a></td>
               <td>{{ article.category.title }}</td>
-              <td class="text-justify" style="font-size:12px;">{{ article.content | raw }}</td>
-              <td style="font-size:12px;"> {{ article.prix }} € </td>
-              <td style="font-size:12px;"> {{ article.status }} </td>
-              <td style="font-size: 11px;">{{ article.createdAt | date("d/m/Y")}} à {{ article.createdAt | date("H:i") }}</td>
+              <td class="text-justify tinytext">{{ article.content | raw }}</td>
+              <td class="tinytext"> {{ article.prix }} € </td>
+              <td class="tinytext"> {{ article.status }} </td>
+              <td class="tinytext">{{ article.createdAt | date("d/m/Y")}} à {{ article.createdAt | date("H:i") }}</td>
 
             </tr>
             <!--<br><a href="{#{{ path('blog_show', {'id': article.id}) }}#}" class="btn btn-sm btn-primary mb-5">Lire la suite</a>-->

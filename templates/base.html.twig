@@ -7,55 +7,59 @@
     </title>
     <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     {% block stylesheets %}{% endblock %}
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand" href="{{ path("home") }}">Dashboard ACS2020</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="{{ path("home") }}">Dashboard ACS2020</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="collapse navbar-collapse" id="navbarColor01">
-        <ul class="navbar-nav mr-auto">
-          {% if app.user %}
-            <li class="nav-item">
-              <a class="nav-link" href="{{ path("blog") }}"><i class="fas fa-list"></i> Liste des articles
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-          {% endif %}
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav mr-auto">
+            {% if app.user %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path("blog") }}"><i class="fas fa-list"></i> Liste des articles
+                  <span class="sr-only">(current)</span>
+                </a>
+              </li>
+            {% endif %}
 
-          {% if is_granted('ROLE_ADMIN') %}
-            <li class="nav-item">
-              <a class="nav-link" href="{{ path("admin") }}"><i class="fas fa-user-cog"></i> Administration</a>
-            </li>
-          {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path("admin") }}"><i class="fas fa-user-cog"></i> Administration</a>
+              </li>
+            {% endif %}
 
-          {% if is_granted('ROLE_ADMIN') %}
-            <li class="nav-item">
-              <a class="nav-link" href="{{ path("blog_create") }}"><i class="fas fa-edit"></i> Créer une nouvelle fiche</a>
-            </li>
-          {% endif %}
-        </ul>
-          {% if not app.user %}
-            <a href="{{ path('security_login') }}" class="text-white px-2"><i class="fas fa-sign-in-alt"></i> Connexion</a> 
-          {% else %}
-            <span class="text-white">
-              Bienvenue {{ app.user.username }} | 
-              <a href="{{ path('security_logout') }}" class="text-white"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
-            </span>
-          {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path("blog_create") }}"><i class="fas fa-edit"></i> Créer une nouvelle fiche</a>
+              </li>
+            {% endif %}
+          </ul>
+            {% if not app.user %}
+              <a href="{{ path('security_login') }}" class="text-white px-2"><i class="fas fa-sign-in-alt"></i> Connexion</a> 
+            {% else %}
+              <span class="text-white">
+                Bienvenue {{ app.user.username }} | 
+                <a href="{{ path('security_logout') }}" class="text-white"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+              </span>
+            {% endif %}
+        </div>
+      </nav>
+
+    <div class="container-fluid">
+      <div class="container pt-4 pb-3">
+        {% block body %}{% endblock %}
       </div>
-    </nav>
-
-    <div class="container pt-4 pb-3">
-      {% block body %}{% endblock %}
     </div>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand" href="{{ path("home") }}">Dashboard ACS2020</a>
-    </nav>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="{{ path("home") }}">Dashboard ACS2020</a>
+      </nav>
 
     {% block javascripts %}{% endblock %}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
