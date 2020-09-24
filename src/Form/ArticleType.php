@@ -24,12 +24,12 @@ class ArticleType extends AbstractType
             ])
             ->add('content')
             ->add('img', FileType::class, [
-                'mapped' => false, // Tell that there is no Entity to link
-                'required' => true,
+                'mapped' => false, // On précise qu'il n'ya aucune entité à lier
+                'required' => false,
                 'constraints' => [
                     new Image([
                         'maxSize' => '5M',
-                        'mimeTypes' => [ // We want to let upload only jpeg/jpg, png, webp
+                        'mimeTypes' => [ // On ne permet que les formats jpeg/jpg, png, webp
                             'image/jpeg', 
                             'image/png', 
                             'image/webp'

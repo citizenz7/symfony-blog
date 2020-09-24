@@ -23,7 +23,7 @@ class AdminController extends AbstractController
             3 // nombre d'éléments par page
         );
 
-        return $this->render('blog/index.html.twig', [
+        return $this->render('admin/index.html.twig', [
             'controller_name' => 'BlogController',
             'articles' => $articles,
         ]);
