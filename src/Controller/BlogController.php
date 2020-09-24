@@ -8,6 +8,7 @@ use App\Form\ArticleType;
 use App\Form\CommentType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,13 +27,19 @@ class BlogController extends AbstractController
     /**
      * @Route("/blog", name="blog")
      */
-    public function index(ArticleRepository $repo)
+    public function index(ArticleRepository $repo, Request $request, PaginatorInterface $paginator)
     {
-        $articles = $repo->findAll();
+        $donnees = $repo->findAll();
+
+        $articles = $paginator->paginate(
+            $donnees, // on passe les données
+            $request->query->getInt('page', 1), // N° de la page en cours, 1 par défaut
+            3 // nombre d'éléments par page
+        );
 
         return $this->render('blog/index.html.twig', [
             'controller_name' => 'BlogController',
-            'articles' => $articles
+            'articles' => $articles,
         ]);
     }
 

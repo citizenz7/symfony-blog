@@ -17,23 +17,28 @@
           </p>
 
           {% if article.status == "vendu" %}
-            <img src="{{ article.phototicket }}" alt="{{ article.title }}" class="img-fluid img-thumbnail float-right">
+            <img src="{{ article.phototicket }}" alt="{{ article.title }}" class="img-fluid img-thumbnail float-right" style="max-height: 200px;">
           {% else %}
-            <img src="https://via.placeholder.com/150x250.png?text=RESERVE" alt="{{ article.title }}" class="img-fluid img-thumbnail float-right">
+            <img src="https://via.placeholder.com/125x200.png?text=RESERVE" alt="{{ article.title }}" class="img-fluid img-thumbnail float-right">
           {% endif %}
           <ul class="list-group">
             <li class="list-group-item"><b>Fournisseur : </b>{{ article.adressefournisseur }}</li>
             <li class="list-group-item"><b>Date d'achat : </b>{{ article.dateachat | date("d/m/Y") }} à {{ article.dateachat | date("H:i") }}</li>
             <li class="list-group-item"><b>Date réservation : </b>{{ article.datereservation | date("d/m/Y") }} à {{ article.datereservation | date("H:i") }}</li>
-            <li class="list-group-item"><b>Date de fin de garantie : </b>{{ article.datefingarantie | date("d/m/Y") }} à {{ article.datefingarantie | date("H:i") }}</li>
-            <li class="list-group-item"><b>Manuel d'utilisation : </b>{{ article.manuelutilisation }}</li>
+            <li class="list-group-item"><b>URL du manuel d'utilisation : </b>{{ article.manuelutilisation }}</li>
           </ul>
         </div>
         <div class="col-3 text-center align-self-start">
-          <p class="mt-2 py-2 font-weight-boldb bg-dark border text-white tinytext">Référence : {{ article.reference }}</p>
+          <p class="mt-2 py-2 font-weight-boldb bg-dark border text-white">Référence : {{ article.reference }}</p>
           <p class="mt-2 py-2 font-weight-boldb bg-light border tinytext">Fiche créée le : <b>{{ article.createdAt | date("d/m/Y") }} à {{ article.createdAt | date("H:i") }}</b></p>
-          <p class="lead mt-3 font-weight-boldb bg-info text-white">{{ article.category.title }}</p>
-          <p class="lead mt-3 font-weight-bold bg-light border">Prix : {{ article.prix }} €</p>
+          <p class="lead py-2 mt-3 font-weight-boldb bg-info text-white">{{ article.category.title }}</p>
+          <p class="lead mt-3 py-2 font-weight-bold bg-light border">Prix : {{ article.prix }} €</p>
+          <p class="lead mt-3 bg-light tinytext border py-2">Fin de garantie :  {{ article.dateFingarantie | date("d/m/Y") }} à {{ article.datefingarantie | date("H:i") }}<br>
+            Il reste : XXX jours
+          </p>
+            
+
+          </p>
           <p class="lead font-weight-bold btn btn-outline-warning btn-lg px-5">{{ article.status }}</p>
         </div>
       </div><!-- //row -->

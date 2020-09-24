@@ -2,6 +2,14 @@
 
 {% block body %}
 
+<div class="row">
+    <div class="col text-center lead pb-3">
+        {% if app.user %}
+            <div class="alert alert-danger py-4 px-3">Vous êtes déjà connecté(e) en tant que {{ app.user.username }}, <a href="{{ path('security_logout') }}">Déconnexion</a></div>
+        {% endif %}
+    </div>
+</div>
+
 <div class="row justify-content-md-center">
     <div class="col-sm-5 my-3">
         <h3 class="pb-3">Inscription</h3>

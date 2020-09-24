@@ -39,6 +39,11 @@
       </table>
     </div>
 
+    <div class="pagination justify-content-center px-2">
+      {{ knp_pagination_render(articles) }}
+    </div>
+
+
   {% else %}
     <div class="bg-warning rounded py-3 px-3 text-center">
       <i class="fas fa-exclamation-circle fa-3x"></i>
