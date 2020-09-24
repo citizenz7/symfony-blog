@@ -30,6 +30,12 @@
 
             {% if is_granted('ROLE_ADMIN') %}
               <li class="nav-item">
+                <a class="nav-link" href="{{ path("category") }}"><i class="fas fa-edit"></i> Liste des catégories</a>
+              </li>
+            {% endif %}
+
+            {% if is_granted('ROLE_ADMIN') %}
+              <li class="nav-item">
                 <a class="nav-link" href="{{ path("admin") }}"><i class="fas fa-user-cog"></i> Administration</a>
               </li>
             {% endif %}
@@ -39,6 +45,13 @@
                 <a class="nav-link" href="{{ path("blog_create") }}"><i class="fas fa-edit"></i> Créer une nouvelle fiche</a>
               </li>
             {% endif %}
+
+            {% if is_granted('ROLE_ADMIN') %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path("category_create") }}"><i class="fas fa-edit"></i> Créer une nouvelle catégorie</a>
+              </li>
+            {% endif %}
+
           </ul>
             {% if not app.user %}
               <a href="{{ path('security_login') }}" class="text-white px-2"><i class="fas fa-sign-in-alt"></i> Connexion</a> 

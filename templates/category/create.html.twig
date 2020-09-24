@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formCategory 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}
+    {% if editMode %}
+        Edition de la catégorie
+    {% else %}
+        Création de la catégorie
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+
+    {% if app.user %}
+
+        {% if editMode %}
+            <h3 class="pb-3">Edition de la catégorie</h3>
+        {% else %}
+            <h3 class="pb-3">Création d'une nouvelle catégorie</h3>
+        {% endif %}
+
+        {{ form_start(formCategory) }}
+
+            {{ form_row(formCategory.title, {'label': "Titre", 'attr': {'placeholder': "Titre de la catégorie"}}) }}
+            {{ form_row(formCategory.description, {'label': "Description de la catgéorie", 'attr': {'placeholder': "Description", 'rows': "4"}}) }}
+
+            <div class="mt-5 text-right">
+                {% if editMode %}
+                    <button type="submit" class="btn btn-warning mr-1">Editer la catégorie</button> 
+                {% else %}
+                    <button type="submit" class="btn btn-success mr-1">Créer la catégorie</button>
+                {% endif %}
+                
+                <button type="reset" class="btn btn-secondary">Annuler</button>
+            </div>
+
+        {{ form_end(formCategory) }}
+    
+    {% else %}
+        <div class="bg-warning rounded py-3 px-3 text-center">
+            <i class="fas fa-exclamation-circle fa-3x"></i>
+            <h3>Vous ne pouvez pas accéder à cette page !</h3>
+        </div>
+    {% endif %}
+
+{% endblock %}

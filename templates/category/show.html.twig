@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+ {% if app.user %}
+
+    <div class="pb-2 border py-3 px-3 mb-3">
+      <h3>{{ category.title }}</h3>
+      <div class="row">
+        <div class="col">
+          <p class="text-justify content-show">
+            {{ category.description | raw }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+  {% else %}
+    <div class="bg-warning rounded py-3 px-3 text-center">
+      <i class="fas fa-exclamation-circle fa-3x"></i>
+      <h3>Vous ne pouvez pas accéder à cette page !</h3>
+    </div>
+  {% endif %}
+
+{% endblock %}

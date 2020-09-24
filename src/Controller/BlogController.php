@@ -130,8 +130,6 @@ class BlogController extends AbstractController
         ]);
     }
 
-
-
     // Vue qui permet d'afficher un article
     /**
      * @Route("/blog/{id}", name="blog_show")
