@@ -33,7 +33,7 @@
               <td class="tinytext"> {{ article.prix }} € </td>
               <td class="tinytext"> {{ article.status }} </td>
               <td class="tinytinytext">{{ article.createdAt | date("d/m/Y") }} à {{ article.createdAt | date("H:i") }}</td>
-              <td><a href="{{ path('blog_edit', {'id': article.id}) }}" class="btn btn-info btn-sm">Edit</a> {{ include('blog/delete.html.twig') }}</td>
+              <td><a href="{{ path('blog_edit', {'id': article.id}) }}" class="btn btn-info btn-sm">Edit</a> {{ include('admin/blog/delete.html.twig') }}</td>
             </tr>
             <!--<br><a href="{#{{ path('blog_show', {'id': article.id}) }}#}" class="btn btn-sm btn-primary mb-5">Lire la suite</a>-->
           {% endfor %}

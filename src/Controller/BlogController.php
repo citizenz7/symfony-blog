@@ -24,6 +24,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BlogController extends AbstractController
 {
+    // Liste des articles sur la partie publique
     /**
      * @Route("/blog", name="blog")
      */
@@ -43,6 +44,7 @@ class BlogController extends AbstractController
         ]);
     }
 
+    // Page d'accueil publique
     /**
      * @Route("/", name="home")
      */
@@ -57,9 +59,10 @@ class BlogController extends AbstractController
     // il peut en effet y avoir des "confusion de route" entre /blog/{id} et /blog/new
     // car Symfony peut penser que new (dans /blog/new) est en en fait un id (dans /blog/{id})
 
+    // Ajout / Edition des articles dans la partie Admin
     /**
-     * @Route("/blog/new", name="blog_create")
-     * @Route("/blog/{id}/edit", name="blog_edit")
+     * @Route("/admin/blog/new", name="blog_create")
+     * @Route("/admin/blog/{id}/edit", name="blog_edit")
      */
     public function form(Article $article = null, Request $request, EntityManagerInterface $manager) {
 
@@ -124,13 +127,13 @@ class BlogController extends AbstractController
 
         // si on a un ID (not null), c'est qu'on fait une édition
         // si on n'a pas d'ID, l'article n'existe pas et donc on va passer en mode création
-        return $this->render('blog/create.html.twig', [
+        return $this->render('admin/blog/create.html.twig', [
             'formArticle' => $form->createView(), 
             'editMode' => $article->getId() !== null
         ]);
     }
 
-    // Vue qui permet d'afficher un article
+    // Vue dans la partie publique qui permet d'afficher un article
     /**
      * @Route("/blog/{id}", name="blog_show")
      */
@@ -160,7 +163,7 @@ class BlogController extends AbstractController
 
     // Suppression d'article
     /**
-     * @Route("/blog/{id}/delete", name="blog_delete", methods={"DELETE"})
+     * @Route("/admin/blog/{id}/delete", name="blog_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Article $article): Response
     {

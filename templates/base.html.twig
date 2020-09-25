@@ -18,54 +18,45 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarColor01">
+        <div class="collapse navbar-collapse px-3" id="navbarColor01">
           <ul class="navbar-nav mr-auto">
-            {% if app.user %}
-              <li class="nav-item">
-                <a class="nav-link" href="{{ path("blog") }}"><i class="fas fa-list"></i> Liste des articles
-                  <span class="sr-only">(current)</span>
-                </a>
-              </li>
-            {% endif %}
-
-            {% if is_granted('ROLE_ADMIN') %}
-              <li class="nav-item">
-                <a class="nav-link" href="{{ path("category") }}"><i class="fas fa-edit"></i> Liste des catégories</a>
-              </li>
-            {% endif %}
-
-            {% if is_granted('ROLE_ADMIN') %}
-              <li class="nav-item">
-                <a class="nav-link" href="{{ path("admin") }}"><i class="fas fa-user-cog"></i> Administration</a>
-              </li>
-            {% endif %}
-
-            {% if is_granted('ROLE_ADMIN') %}
-              <li class="nav-item">
-                <a class="nav-link" href="{{ path("blog_create") }}"><i class="fas fa-edit"></i> Créer une nouvelle fiche</a>
-              </li>
-            {% endif %}
-
-            {% if is_granted('ROLE_ADMIN') %}
-              <li class="nav-item">
-                <a class="nav-link" href="{{ path("category_create") }}"><i class="fas fa-edit"></i> Créer une nouvelle catégorie</a>
-              </li>
-            {% endif %}
 
           </ul>
-            {% if not app.user %}
-              <a href="{{ path('security_login') }}" class="text-white px-2"><i class="fas fa-sign-in-alt"></i> Connexion</a> 
-            {% else %}
-              <span class="text-white">
-                Bienvenue {{ app.user.username }} | 
-                <a href="{{ path('security_logout') }}" class="text-white"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
-              </span>
-            {% endif %}
+          
+          <!-- partie droite + menu -->
+          {% if not app.user %}
+            <a href="{{ path('security_login') }}" class="text-white px-2"><i class="fas fa-sign-in-alt"></i> Connexion</a> 
+            <a href="{{ path('security_registration') }}" class="text-white px-2"><i class="fas fa-sign-in-alt"></i> S'enregistrer</a>
+          {% else %}
+            <div class="dropdown">
+              <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Bienvenue <b>{{ app.user.username }}</b>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <!-- ADMIN MENU -->
+                {% if is_granted('ROLE_ADMIN') %}
+                  <span class="dropdown-item bg-primary text-white" type="button">Statut : Admin</span>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{{ path("admin_blog") }}"><i class="fas fa-user-cog"></i> Articles Admin</a>
+                  <a class="dropdown-item" href="{{ path("admin_categories") }}"><i class="fas fa-user-cog"></i> Catégories Admin</a>
+
+                <!-- USER MENU -->
+                {% else %}
+                  <span class="dropdown-item bg-primary text-white" type="button">Statut : User</span>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{{ path("blog") }}"><i class="fas fa-list"></i> Liste des articles</a>
+                  <a class="dropdown-item" href="{{ path("category") }}"><i class="fas fa-edit"></i> Liste des catégories</a>
+                {% endif %}
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{{ path('security_logout') }}" class="text-white"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+              </div>
+            </div>
+          {% endif %}
         </div>
       </nav>
 
     <div class="container-fluid">
-      <div class="container pt-4 pb-3">
+      <div class="container pt-4 pb-3 px-3 card my-4">
         {% block body %}{% endblock %}
       </div>
     </div>

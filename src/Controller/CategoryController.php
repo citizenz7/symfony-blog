@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CategoryController extends AbstractController
 {
+    // Affichage des catégories de la partie publique
     /**
      * @Route("/category", name="category")
      */
@@ -38,9 +39,10 @@ class CategoryController extends AbstractController
     // il peut en effet y avoir des "confusion de route" entre /blog/{id} et /blog/new
     // car Symfony peut penser que new (dans /blog/new) est en en fait un id (dans /blog/{id})
 
+    // Ajout / Edition des catégories dans la partie Admin
     /**
-     * @Route("/category/new", name="category_create")
-     * @Route("/category/{id}/edit", name="category_edit")
+     * @Route("/admin/category/new", name="category_create")
+     * @Route("/admin/category/{id}/edit", name="category_edit")
      */
     public function form(Category $category = null, Request $request, EntityManagerInterface $manager) {
 
@@ -72,7 +74,7 @@ class CategoryController extends AbstractController
 
         // si on a un ID (not null), c'est qu'on fait une édition
         // si on n'a pas d'ID, la catégorie n'existe pas et donc on va passer en mode création
-        return $this->render('category/create.html.twig', [
+        return $this->render('admin/category/create.html.twig', [
             'formCategory' => $form->createView(), 
             'editMode' => $category->getId() !== null
         ]);
@@ -92,7 +94,7 @@ class CategoryController extends AbstractController
     
     // Suppression d'une catégorie'
     /**
-     * @Route("/category/{id}/delete", name="category_delete", methods={"DELETE"})
+     * @Route("/admin/category/{id}/delete", name="category_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Category $category): Response
     {
