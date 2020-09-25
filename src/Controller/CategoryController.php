@@ -74,7 +74,7 @@ class CategoryController extends AbstractController
 
         // si on a un ID (not null), c'est qu'on fait une édition
         // si on n'a pas d'ID, la catégorie n'existe pas et donc on va passer en mode création
-        return $this->render('admin/category/create.html.twig', [
+        return $this->render('admin/categories/create.html.twig', [
             'formCategory' => $form->createView(), 
             'editMode' => $category->getId() !== null
         ]);
