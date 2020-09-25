@@ -52,4 +52,10 @@ class SecurityController extends AbstractController
      */
     public function logout() {}
 
+    /**
+     * @Route("/access403", name="access403")
+     */
+    public function access403() {
+        return $this->render('security/access403.html.twig');
+    }
 }

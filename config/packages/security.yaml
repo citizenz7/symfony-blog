@@ -3,6 +3,7 @@ security:
         App\Entity\User:
             algorithm: bcrypt
 
+    access_denied_url: access403
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
