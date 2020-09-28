@@ -1,0 +1,43 @@
+{% extends 'base.html.twig'%}
+
+{% block title %}Rechercher un article{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h2>Votre recherche</h2>
+    <div class="form-group">
+        {% form_theme searchForm 'bootstrap_4_layout.html.twig' %}
+        {{ form_start(searchForm) }}
+            {{ form_row(searchForm.title, {'label': 'Recherche par titre', 'attr': {'placeholder': 'Veuillez entrer un mot clé...', 'class': 'form-control'}}) }}
+            <button class="btn btn-primary">rechercher</button>
+        {{ form_end(searchForm) }}
+    </div>
+</div>
+
+{% if app.request.method == 'POST' %}
+  <div class="container mt-3">
+    {% if articles | length == 0 %}
+      <h5>Aucun résultat pour votre recherche.</h5>
+    {% else %}
+      <h4>Résultats de votre recherche</h4>
+      {% for article in articles %}
+        <div class="card mt-3 py-3 px-3">
+          <h4>{{ article.title }}</h4>
+          <p class="text-justify">
+            Ecrit le {{ article.createdAt | date('d/m/Y') }} à {{ article.createdAt | date('H:i') }} dans la catégorie {{ article.category.title }}
+          </p>
+          <p class="text-justify">
+            {{ article.content | slice(0, 500) | raw }} ...
+          </p>
+          <a href="{{ path('blog_show', {'id': article.id}) }}" class="btn btn-primary">Lire la suite</a>
+        </div>
+        <div class="pagination">
+          {{ knp_pagination_render(articles) }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+{% endif %}
+
+{% endblock %}

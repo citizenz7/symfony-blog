@@ -22,7 +22,7 @@ class Article
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min=4, max=255, minMessage="Le titre est trop court !")
+     * @Assert\Length(min=3, max=255, minMessage="Le titre est trop court !")
      */
     private $title;
 

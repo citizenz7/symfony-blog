@@ -34,7 +34,9 @@
           <p class="lead py-2 mt-3 font-weight-boldb bg-info text-white">{{ article.category.title }}</p>
           <p class="lead mt-3 py-2 font-weight-bold bg-light border">Prix : {{ article.prix }} €</p>
           <p class="lead mt-3 bg-light tinytext border py-2">Fin de garantie :  {{ article.dateFingarantie | date("d/m/Y") }} à {{ article.datefingarantie | date("H:i") }}<br>
-            Il reste : XXX jours
+            {% set difference = date(article.dateAchat).diff(date(article.dateFingarantie)) %}
+            {% set leftDays = difference.days %}
+            Il reste <span class="font-weight-bold lead">{{ leftDays }} jours</span>
           </p>
             
 
