@@ -30,7 +30,9 @@ class BlogController extends AbstractController
      */
     public function index(ArticleRepository $repo, Request $request, PaginatorInterface $paginator)
     {
-        $donnees = $repo->findAll();
+
+        //$donnees = $repo->findAll();
+        $donnees = $repo->findArticles();
 
         $articles = $paginator->paginate(
             $donnees, // on passe les données

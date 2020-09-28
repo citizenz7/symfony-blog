@@ -25,7 +25,7 @@ class ArticleType extends AbstractType
             ])
             ->add('content', CKEditorType::class)
             ->add('img', FileType::class, [
-                'mapped' => false, // On précise qu'il n'ya aucune entité à lier
+                'mapped' => false, // On précise qu'il n'y a aucune entité à lier
                 'required' => false,
                 'constraints' => [
                     new Image([

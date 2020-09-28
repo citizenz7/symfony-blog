@@ -12,12 +12,12 @@
       <table class="table table-hover">
         <thead>
           <th>Image</th>
-          <th width="20%">Nom</th>
+          <th width="20%">{{ knp_pagination_sortable(articles, 'Nom', 'p.title') }}</th>
           <th>Catégorie</th>
           <th>Contenu</th>
-          <th width="9%">Prix</th>
-          <th>Status</th>
-          <th width="11%">Créé le</th>
+          <th width="9%">{{ knp_pagination_sortable(articles, 'Prix', 'p.prix') }}</th>
+          <th width="7%">{{ knp_pagination_sortable(articles, 'Status', 'p.status') }}</th>
+          <th width="11%">{{ knp_pagination_sortable(articles, 'Créé le', 'p.createdAt') }}</th>
 
         </thead>
         <tbody>

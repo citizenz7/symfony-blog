@@ -27,6 +27,12 @@ class ArticleRepository extends ServiceEntityRepository
             ->execute();
     }
 
+    public function findArticles()
+    {
+        $qb = $this->createQueryBuilder('p');
+        //$qb->where('p.status=1');
+        return $qb->getQuery(); // WITHOUT ->getResult(); !!
+    }
 
 
     // /**

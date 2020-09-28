@@ -9,7 +9,7 @@
       <div class="text-muted font-italic pb-2">
         <!--Créée le {#{ article.createdAt | date("d/m/Y") }#} à {#{ article.createdAt | date("H:i") }#}, dans la catégorie <span class="font-weight-bold">{#{ article.category.title }#}</span>-->
       </div>
-      <div class="row row-show">
+      <div class="row">
         <div class="col">
           <img src="../uploads/article_image/{{ article.images }}" class="img-fluid float-left img-show mr-3 mt-1" alt="{{ article.title }}">
           <p class="text-justify">
@@ -25,7 +25,7 @@
             <li class="list-group-item"><b>Fournisseur : </b>{{ article.adressefournisseur }}</li>
             <li class="list-group-item"><b>Date d'achat : </b>{{ article.dateachat | date("d/m/Y") }} à {{ article.dateachat | date("H:i") }}</li>
             <li class="list-group-item"><b>Date réservation : </b>{{ article.datereservation | date("d/m/Y") }} à {{ article.datereservation | date("H:i") }}</li>
-            <li class="list-group-item"><b>URL du manuel d'utilisation : </b>{{ article.manuelutilisation }}</li>
+            <li class="list-group-item"><b>URL du manuel d'utilisation : </b>{{ article.manuelutilisation | raw }}</li>
           </ul>
         </div>
         <div class="col-3 text-center align-self-start">
