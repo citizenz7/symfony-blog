@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -41,7 +42,12 @@ class ArticleType extends AbstractType
             ])
             //->add('createdAt')
             ->add('prix')
-            ->add('status')
+            ->add('status', ChoiceType::class, [
+                'choices' => [
+                    'vendu' => 'vendu',
+                    'reservé' => 'reserve'
+                ]
+            ])
             ->add('reference')
             ->add('adresse_fournisseur')
             ->add('date_achat')

@@ -50,8 +50,9 @@
                   <a class="dropdown-item" href="{{ path("blog") }}"><i class="fas fa-list"></i> Liste des articles</a>
                   <a class="dropdown-item" href="{{ path("category") }}"><i class="fas fa-edit"></i> Liste des catégories</a>
                 {% endif %}
-
+                <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ path("search") }}"><i class="fas fa-search"></i> Rechercher</a>
+                <a class="dropdown-item" href="{{ path("contact") }}"><i class="fas fa-search"></i> Nous contacter</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ path('security_logout') }}" class="text-white"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
               </div>
@@ -66,7 +67,7 @@
       </div>
     </div>
 
-      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-0">
         <a class="text-white" href="{{ path("home") }}">Dashboard ACS2020</a>
         <p class="text-white pt-3 pl-1">| &copy; {{ 'now'|date('Y') }} - The Dashboard ACS Project</p>
         <p class="ml-auto pt-3 pr-1"><a class="text-white" href="#tothetop"><i class="fas fa-chevron-circle-up fa-3x"></i></a></p>

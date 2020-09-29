@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nous contacter{% endblock %}
+
+{% block body %}
+
+<h1>Nous contacter</h1>
+<div class="form-group">
+    {{ form_start(our_form) }}
+    {{ form_row(our_form.name, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre nom'}}) }}
+</div>
+<div class="form-group">
+    {{ form_row(our_form.email, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre adresse e-mail'}}) }}
+</div>
+<div class="form-group">
+    {{ form_row(our_form.message, {'attr': {'class': 'form-control'}}) }}
+</div>
+<div class="form-group text-right">
+    <input type="submit" value="Envoyer" class="btn btn-primary mr-3"> <input type="reset" value="Annuler" class="btn btn-secondary">
+</div>
+{{ form_end(our_form) }}
+</div>
+
+{% endblock %}
