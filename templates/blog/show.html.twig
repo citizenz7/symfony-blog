@@ -24,7 +24,13 @@
           <ul class="list-group">
             <li class="list-group-item"><b>Fournisseur : </b>{{ article.adressefournisseur }}</li>
             <li class="list-group-item"><b>Date d'achat : </b>{{ article.dateachat | date("d/m/Y") }} à {{ article.dateachat | date("H:i") }}</li>
-            <li class="list-group-item"><b>Date réservation : </b>{{ article.datereservation | date("d/m/Y") }} à {{ article.datereservation | date("H:i") }}</li>
+            <li class="list-group-item"><b>Date réservation : </b>
+              {% if article.datereservation != null %}
+                {{ article.datereservation | date("d/m/Y") }} à {{ article.datereservation | date("H:i") }}
+              {% else %}
+                Vendu
+              {% endif %}
+            </li>
             <li class="list-group-item"><b>URL du manuel d'utilisation : </b>{{ article.manuelutilisation | raw }}</li>
           </ul>
         </div>
