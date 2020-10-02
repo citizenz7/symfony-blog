@@ -12,9 +12,9 @@
       <div class="row">
         <div class="col">
           <img src="../uploads/article_image/{{ article.images }}" class="img-fluid float-left img-show mr-3 mt-1" alt="{{ article.title }}">
-          <p class="text-justify">
+          <div class="text-justify">
             {{ article.content | raw }}
-          </p>
+          </div>
 
           {% if article.status == "vendu" %}
             <img src="{{ article.phototicket }}" alt="{{ article.title }}" class="img-fluid img-thumbnail float-right" style="max-height: 200px;">
@@ -23,7 +23,13 @@
           {% endif %}
           <ul class="list-group">
             <li class="list-group-item"><b>Fournisseur : </b>{{ article.adressefournisseur }}</li>
-            <li class="list-group-item"><b>Date d'achat : </b>{{ article.dateachat | date("d/m/Y") }} à {{ article.dateachat | date("H:i") }}</li>
+            <li class="list-group-item"><b>Date d'achat : </b>
+              {% if article.dateachat != null %}
+                {{ article.dateachat | date("d/m/Y") }} à {{ article.dateachat | date("H:i") }}
+              {% else %}
+                Réservé
+              {% endif %}
+            </li>
             <li class="list-group-item"><b>Date réservation : </b>
               {% if article.datereservation != null %}
                 {{ article.datereservation | date("d/m/Y") }} à {{ article.datereservation | date("H:i") }}
@@ -31,7 +37,7 @@
                 Vendu
               {% endif %}
             </li>
-            <li class="list-group-item"><b>URL du manuel d'utilisation : </b>{{ article.manuelutilisation | raw }}</li>
+            <li class="list-group-item"><b>Manuel d'utilisation : </b>{{ article.manuelutilisation | raw }}</li>
           </ul>
         </div>
         <div class="col-3 text-center align-self-start">
@@ -39,15 +45,27 @@
           <p class="mt-2 py-2 font-weight-boldb bg-light border tinytext">Fiche créée le : <b>{{ article.createdAt | date("d/m/Y") }} à {{ article.createdAt | date("H:i") }}</b></p>
           <p class="lead py-2 mt-3 font-weight-boldb bg-info text-white">{{ article.category.title }}</p>
           <p class="lead mt-3 py-2 font-weight-bold bg-light border">Prix : {{ article.prix }} €</p>
-          <p class="lead mt-3 bg-light tinytext border py-2">Fin de garantie :  {{ article.dateFingarantie | date("d/m/Y") }} à {{ article.datefingarantie | date("H:i") }}<br>
-            {% set difference = date(article.dateAchat).diff(date(article.dateFingarantie)) %}
-            {% set leftDays = difference.days %}
-            Il reste <span class="font-weight-bold lead">{{ leftDays }} jours</span>
+          <p class="lead mt-3 bg-light tinytext border py-2">Fin de garantie :  
+            {% if article.datefingarantie != null %}
+              {{ article.dateFingarantie | date("d/m/Y") }} à {{ article.datefingarantie | date("H:i") }}
+            {% else %}
+              Non applicable
+            {% endif %}
+            <br>
+            {% if article.datefingarantie != null %}
+              {% set difference = date(article.dateAchat).diff(date(article.dateFingarantie)) %}
+              {% set leftDays = difference.days %}
+              Il reste <span class="font-weight-bold lead">{{ leftDays }} jours</span>
+            {% endif %}
           </p>
-            
-
           </p>
-          <p class="lead font-weight-bold btn btn-outline-warning btn-lg px-5">{{ article.status }}</p>
+          <p class="lead font-weight-bold btn btn-outline-warning btn-lg px-5">
+            {% if article.status == 'reserve' %}
+              Réservé
+            {% else %}
+              vendu
+             {% endif %} 
+          </p>
         </div>
       </div><!-- //row -->
     </div>

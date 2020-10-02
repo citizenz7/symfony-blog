@@ -1,2 +1,1 @@
 # symfony-blog
-# symfony-blog
